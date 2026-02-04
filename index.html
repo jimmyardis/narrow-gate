@@ -3,109 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Narrow Gate | The Architecture of Beauty</title>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>Narrow Gate | Places of Enduring Value</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/scrollreveal"></script>
     <style>
         :root {
-            --parchment: #fdfaf6;
-            --forest: #1b3022;
-            --clay: #a67c52;
-            --text: #2c2c2c;
+            --navy: #0a192f;
+            --white: #ffffff;
+            --light-grey: #f4f4f4;
+            --accent: #112240;
         }
 
         body {
             margin: 0;
-            background-color: var(--parchment);
-            color: var(--text);
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--white);
+            color: var(--navy);
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
-        h1, h2, h3, .quote {
-            font-family: 'Libre+Baskerville', serif;
+        h1, h2, h3, blockquote {
+            font-family: 'Playfair Display', serif;
         }
 
         /* --- HERO SECTION --- */
-        .hero {
+        header {
             height: 100vh;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            background: linear-gradient(rgba(27, 48, 34, 0.6), rgba(27, 48, 34, 0.6)), 
-                        url('https://images.unsplash.com/photo-1510673398445-94f436963b5c?q=80&w=2000&auto=format&fit=crop'); /* High-end neighborhood stock */
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(10, 25, 47, 0.4), rgba(10, 25, 47, 0.4)), 
+                        url('https://raw.githubusercontent.com/YourRepo/Images/main/row-of-houses-sky-water.jpg'); /* Mapping to Screenshot 2026-01-29 120115.jpg */
             background-size: cover;
             background-position: center;
             color: white;
-            text-align: center;
-            padding: 20px;
+            padding: 0 20px;
         }
 
-        .hero-content {
-            max-width: 900px;
-        }
-
-        .hero h1 {
+        .logo {
             font-size: 4rem;
-            margin-bottom: 20px;
-            letter-spacing: 5px;
+            letter-spacing: 0.3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
         }
 
-        .hoffer-quote {
-            font-size: 1.8rem;
+        .tagline {
+            font-size: 1.5rem;
             font-style: italic;
-            line-height: 1.4;
-            border-left: 4px solid var(--clay);
-            padding-left: 20px;
-            margin: 30px auto;
+            max-width: 800px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
-        /* --- CATEGORY SECTION --- */
-        .work-section {
-            padding: 100px 5%;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 60px;
+        /* --- CATEGORY GRID --- */
+        section {
+            padding: 100px 10%;
+            max-width: 1400px;
+            margin: auto;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
         }
 
         .category-card {
             position: relative;
-            height: 500px;
+            background: var(--light-grey);
             overflow: hidden;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.5s ease;
+            height: 450px;
+            transition: all 0.4s ease;
+            border: 1px solid #ddd;
         }
 
         .category-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s ease;
         }
 
-        .overlay {
+        .card-content {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(transparent, var(--forest));
-            padding: 40px;
+            padding: 30px;
+            background: rgba(10, 25, 47, 0.9);
             color: white;
-            transform: translateY(100px);
+            transform: translateY(120px);
             transition: transform 0.4s ease;
         }
 
-        .category-card:hover .overlay {
+        .category-card:hover .card-content {
             transform: translateY(0);
         }
 
@@ -113,129 +108,121 @@
             transform: scale(1.1);
         }
 
-        .project-list {
-            margin-top: 15px;
-            font-size: 0.9rem;
-            opacity: 0;
-            transition: opacity 0.6s ease;
+        .category-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.8rem;
         }
 
-        .category-card:hover .project-list {
-            opacity: 1;
+        .project-links {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0 0 0;
+            font-size: 0.95rem;
         }
 
-        .tag {
-            background: var(--clay);
-            padding: 5px 15px;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .project-links li {
+            margin-bottom: 5px;
+            opacity: 0.8;
         }
 
         /* --- PHILOSOPHY SECTION --- */
-        .philosophy {
-            background-color: var(--forest);
-            color: var(--parchment);
+        .philosophy-banner {
+            background-color: var(--navy);
+            color: white;
+            text-align: center;
             padding: 120px 15%;
-            text-align: center;
         }
 
-        .philosophy p {
-            font-size: 1.4rem;
-            line-height: 1.8;
-            font-family: 'Libre Baskerville', serif;
+        .philosophy-banner blockquote {
+            font-size: 2.2rem;
+            line-height: 1.4;
+            margin: 0;
+            font-style: italic;
         }
 
-        /* --- FOOTER --- */
-        footer {
-            padding: 80px 5%;
-            text-align: center;
-            background: #f1ede4;
-        }
-
-        .btn-modern {
+        /* --- BUTTONS & ANIMATIONS --- */
+        .btn {
+            display: inline-block;
+            margin-top: 40px;
             padding: 15px 40px;
-            border: 2px solid var(--forest);
-            background: none;
-            color: var(--forest);
-            font-weight: 700;
+            border: 2px solid white;
+            color: white;
             text-decoration: none;
-            transition: 0.3s;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
         }
 
-        .btn-modern:hover {
-            background: var(--forest);
-            color: var(--parchment);
-            box-shadow: 0 5px 15px rgba(27, 48, 34, 0.3);
+        .btn:hover {
+            background: white;
+            color: var(--navy);
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px;
+            background: var(--light-grey);
+            font-size: 0.9rem;
+            color: var(--slate);
         }
     </style>
 </head>
 <body>
 
-    <div class="hero">
-        <div class="hero-content">
-            <h4 style="letter-spacing: 8px;">NARROW GATE</h4>
-            <div class="hoffer-quote">
-                "In times of change, learners inherit the earth, while the learned find themselves beautifully equipped to deal with a world that no longer exists." 
-            </div>
-            <a href="#work" class="btn-modern" style="border-color: white; color: white;">EXPLORE THE VISION</a>
-        </div>
-    </div>
+    <header>
+        <div class="logo">NARROW GATE</div>
+        <div class="tagline">"For narrow is the gate and difficult is the way which leads to life."</div>
+        <a href="#work" class="btn">View the Portfolio</a>
+    </header>
 
-    <section id="work" class="work-section">
-        <h2 class="section-title">The Hierarchy of Place</h2>
+    <section id="work">
+        <h2 style="text-align: center; font-size: 2.8rem; margin-bottom: 20px;">The Hierarchy of Place</h2>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto 60px auto;">Click a category to explore vision-led results ranging from historic restoration to the building of entire neighborhoods.</p>
+
         <div class="grid">
-            
             <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&q=80&w=1000" alt="Neighborhood">
-                <div class="overlay">
-                    <span class="tag">01. New Neighborhoods</span>
-                    <h3>Traditional Neighborhood Design</h3>
-                    <div class="project-list">
-                        • I'On (Mt. Pleasant)<br>
-                        • Newpoint (Beaufort)<br>
-                        • Hammond’s Ferry
-                    </div>
+                <img src="https://raw.githubusercontent.com/YourRepo/Images/main/canal-street-view.jpg" alt="Traditional Neighborhoods"> <div class="card-content">
+                    <h3>Traditional Neighborhoods</h3>
+                    <ul class="project-links">
+                        <li>• I'On (Mount Pleasant)</li>
+                        <li>• Newpoint (Beaufort)</li>
+                        <li>• Hammond’s Ferry</li>
+                    </ul>
                 </div>
             </div>
 
             <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1513584684374-8bdb74da9f86?auto=format&fit=crop&q=80&w=1000" alt="Historic">
-                <div class="overlay">
-                    <span class="tag">02. Historic Restoration</span>
-                    <h3>Stewardship of Legacy</h3>
-                    <div class="project-list">
-                        • Fort Sullivan (Sullivan’s Island)<br>
-                        • Morris Square (Charleston)
-                    </div>
+                <img src="https://raw.githubusercontent.com/YourRepo/Images/main/fort-sullivan-castle.jpg" alt="Historic Restoration"> <div class="card-content">
+                    <h3>Historic Restoration</h3>
+                    <ul class="project-links">
+                        <li>• Fort Sullivan (Sullivan’s Island)</li>
+                        <li>• Morris Square (Charleston)</li>
+                    </ul>
                 </div>
             </div>
 
             <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1574362848149-11496d93a7c7?auto=format&fit=crop&q=80&w=1000" alt="Adaptive">
-                <div class="overlay">
-                    <span class="tag">03. Adaptive Reuse</span>
-                    <h3>Evolutionary Planning</h3>
-                    <div class="project-list">
-                        • Earl’s Court (Old Village)<br>
-                        • Catfiddle Street<br>
-                        • Village at Port Royal
-                    </div>
+                <img src="https://raw.githubusercontent.com/YourRepo/Images/main/cobblestone-alley-view.jpg" alt="Adaptive Reuse"> <div class="card-content">
+                    <h3>Adaptive Reuse</h3>
+                    <ul class="project-links">
+                        <li>• Earl's Court (Old Village)</li>
+                        <li>• Catfiddle Street</li>
+                        <li>• Village at Port Royal</li>
+                    </ul>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <section class="philosophy">
-        <p>"Strive for the luxury of expert simplicity... aim for a soulful harmony such that the whole is made ever greater than the sum of its parts."</p>
-        <p style="font-size: 1rem; opacity: 0.8; margin-top: 20px;">— THE MUGDOCK DECREE</p>
+    <section class="philosophy-banner">
+        [cite_start]<blockquote>"In times of change, learners inherit the earth, while the learned find themselves beautifully equipped to deal with a world that no longer exists." [cite: 343]</blockquote>
+        <p style="margin-top: 30px; opacity: 0.8;">— ERIC HOFFER</p>
     </section>
 
     <footer>
-        <h2>Knocking it out of the park.</h2>
-        <p style="margin-bottom: 40px;">Marketing Opportunity for Carolina Redesign</p>
-        <a href="mailto:vince@locisouth.com" class="btn-modern">INITIATE DIALOGUE</a>
+        <p>&copy; 2026 NARROW GATE | Formerly Loci</p>
+        <p>Expert Simplicity in the Built Environment</p>
     </footer>
 
     <script>
@@ -245,7 +232,7 @@
             origin: 'bottom',
             interval: 200 
         });
-        ScrollReveal().reveal('.philosophy', { delay: 400 });
+        ScrollReveal().reveal('.philosophy-banner', { delay: 400 });
     </script>
 </body>
 </html>
