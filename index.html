@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Narrow Gate | The Architecture of Beauty</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <style>
+        :root {
+            --parchment: #fdfaf6;
+            --forest: #1b3022;
+            --clay: #a67c52;
+            --text: #2c2c2c;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--parchment);
+            color: var(--text);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .quote {
+            font-family: 'Libre+Baskerville', serif;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(27, 48, 34, 0.6), rgba(27, 48, 34, 0.6)), 
+                        url('https://images.unsplash.com/photo-1510673398445-94f436963b5c?q=80&w=2000&auto=format&fit=crop'); /* High-end neighborhood stock */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            letter-spacing: 5px;
+        }
+
+        .hoffer-quote {
+            font-size: 1.8rem;
+            font-style: italic;
+            line-height: 1.4;
+            border-left: 4px solid var(--clay);
+            padding-left: 20px;
+            margin: 30px auto;
+        }
+
+        /* --- CATEGORY SECTION --- */
+        .work-section {
+            padding: 100px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .category-card {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.5s ease;
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, var(--forest));
+            padding: 40px;
+            color: white;
+            transform: translateY(100px);
+            transition: transform 0.4s ease;
+        }
+
+        .category-card:hover .overlay {
+            transform: translateY(0);
+        }
+
+        .category-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .project-list {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .category-card:hover .project-list {
+            opacity: 1;
+        }
+
+        .tag {
+            background: var(--clay);
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- PHILOSOPHY SECTION --- */
+        .philosophy {
+            background-color: var(--forest);
+            color: var(--parchment);
+            padding: 120px 15%;
+            text-align: center;
+        }
+
+        .philosophy p {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            font-family: 'Libre Baskerville', serif;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 80px 5%;
+            text-align: center;
+            background: #f1ede4;
+        }
+
+        .btn-modern {
+            padding: 15px 40px;
+            border: 2px solid var(--forest);
+            background: none;
+            color: var(--forest);
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-modern:hover {
+            background: var(--forest);
+            color: var(--parchment);
+            box-shadow: 0 5px 15px rgba(27, 48, 34, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h4 style="letter-spacing: 8px;">NARROW GATE</h4>
+            <div class="hoffer-quote">
+                "In times of change, learners inherit the earth, while the learned find themselves beautifully equipped to deal with a world that no longer exists." 
+            </div>
+            <a href="#work" class="btn-modern" style="border-color: white; color: white;">EXPLORE THE VISION</a>
+        </div>
+    </div>
+
+    <section id="work" class="work-section">
+        <h2 class="section-title">The Hierarchy of Place</h2>
+        <div class="grid">
+            
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&q=80&w=1000" alt="Neighborhood">
+                <div class="overlay">
+                    <span class="tag">01. New Neighborhoods</span>
+                    <h3>Traditional Neighborhood Design</h3>
+                    <div class="project-list">
+                        • I'On (Mt. Pleasant)<br>
+                        • Newpoint (Beaufort)<br>
+                        • Hammond’s Ferry
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1513584684374-8bdb74da9f86?auto=format&fit=crop&q=80&w=1000" alt="Historic">
+                <div class="overlay">
+                    <span class="tag">02. Historic Restoration</span>
+                    <h3>Stewardship of Legacy</h3>
+                    <div class="project-list">
+                        • Fort Sullivan (Sullivan’s Island)<br>
+                        • Morris Square (Charleston)
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1574362848149-11496d93a7c7?auto=format&fit=crop&q=80&w=1000" alt="Adaptive">
+                <div class="overlay">
+                    <span class="tag">03. Adaptive Reuse</span>
+                    <h3>Evolutionary Planning</h3>
+                    <div class="project-list">
+                        • Earl’s Court (Old Village)<br>
+                        • Catfiddle Street<br>
+                        • Village at Port Royal
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="philosophy">
+        <p>"Strive for the luxury of expert simplicity... aim for a soulful harmony such that the whole is made ever greater than the sum of its parts."</p>
+        <p style="font-size: 1rem; opacity: 0.8; margin-top: 20px;">— THE MUGDOCK DECREE</p>
+    </section>
+
+    <footer>
+        <h2>Knocking it out of the park.</h2>
+        <p style="margin-bottom: 40px;">Marketing Opportunity for Carolina Redesign</p>
+        <a href="mailto:vince@locisouth.com" class="btn-modern">INITIATE DIALOGUE</a>
+    </footer>
+
+    <script>
+        ScrollReveal().reveal('.category-card', { 
+            delay: 200, 
+            distance: '50px', 
+            origin: 'bottom',
+            interval: 200 
+        });
+        ScrollReveal().reveal('.philosophy', { delay: 400 });
+    </script>
+</body>
+</html>
