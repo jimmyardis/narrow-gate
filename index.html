@@ -10,8 +10,8 @@
         :root {
             --navy: #0a192f;
             --white: #ffffff;
-            --light-grey: #f4f4f4;
-            --accent: #112240;
+            --gold: #c5a059;
+            --overlay: rgba(10, 25, 47, 0.85);
         }
 
         body {
@@ -19,220 +19,214 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--white);
             color: var(--navy);
-            line-height: 1.6;
             overflow-x: hidden;
         }
 
-        h1, h2, h3, blockquote {
-            font-family: 'Playfair Display', serif;
+        h1, h2, h3, .quote { font-family: 'Playfair Display', serif; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 30px 50px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: white;
+            text-transform: uppercase;
         }
 
         /* --- HERO SECTION --- */
         header {
             height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(rgba(10, 25, 47, 0.4), rgba(10, 25, 47, 0.4)), 
-                        url('https://raw.githubusercontent.com/YourRepo/Images/main/row-of-houses-sky-water.jpg'); /* Mapping to Screenshot 2026-01-29 120115.jpg */
+            background: linear-gradient(rgba(10, 25, 47, 0.3), rgba(10, 25, 47, 0.3)), 
+                        url('https://images.squarespace-cdn.com/content/v1/59944cda03596ee46fd2af25/1520008910631-QZSKU0LHTNO7P5TWAS55/Morri+Sq-107.jpeg?format=2500w'); 
             background-size: cover;
             background-position: center;
             color: white;
             padding: 0 20px;
         }
 
-        .logo {
-            font-size: 4rem;
-            letter-spacing: 0.3rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .tagline {
-            font-size: 1.5rem;
-            font-style: italic;
+        .floating-quote {
             max-width: 800px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-size: 2.2rem;
+            font-style: italic;
+            line-height: 1.3;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            animation: fadeIn 3s ease-in;
         }
 
-        /* --- CATEGORY GRID --- */
-        section {
-            padding: 100px 10%;
-            max-width: 1400px;
-            margin: auto;
-        }
-
-        .grid {
+        /* --- CATEGORIES WIREFRAME --- */
+        .categories-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
+            grid-template-columns: repeat(2, 1fr);
+            height: 100vh;
+            background: var(--navy);
         }
 
-        .category-card {
+        .cat-box {
             position: relative;
-            background: var(--light-grey);
             overflow: hidden;
-            height: 450px;
-            transition: all 0.4s ease;
-            border: 1px solid #ddd;
+            border: 0.5px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+            transition: all 0.5s ease;
         }
 
-        .category-card img {
+        .cat-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s ease;
+            opacity: 0.6;
+            transition: all 0.8s ease;
         }
 
-        .card-content {
+        .cat-label {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 30px;
-            background: rgba(10, 25, 47, 0.9);
-            color: white;
-            transform: translateY(120px);
-            transition: transform 0.4s ease;
-        }
-
-        .category-card:hover .card-content {
-            transform: translateY(0);
-        }
-
-        .category-card:hover img {
-            transform: scale(1.1);
-        }
-
-        .category-card h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.8rem;
-        }
-
-        .project-links {
-            list-style: none;
-            padding: 0;
-            margin: 15px 0 0 0;
-            font-size: 0.95rem;
-        }
-
-        .project-links li {
-            margin-bottom: 5px;
-            opacity: 0.8;
-        }
-
-        /* --- PHILOSOPHY SECTION --- */
-        .philosophy-banner {
-            background-color: var(--navy);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             color: white;
             text-align: center;
-            padding: 120px 15%;
+            z-index: 10;
         }
 
-        .philosophy-banner blockquote {
-            font-size: 2.2rem;
-            line-height: 1.4;
-            margin: 0;
-            font-style: italic;
-        }
-
-        /* --- BUTTONS & ANIMATIONS --- */
-        .btn {
-            display: inline-block;
-            margin-top: 40px;
-            padding: 15px 40px;
-            border: 2px solid white;
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
+        .cat-label h2 {
+            font-size: 2rem;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.3s;
+            margin-bottom: 10px;
         }
 
-        .btn:hover {
-            background: white;
+        .cat-label p {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* --- HOVER EFFECTS --- */
+        .cat-box:hover img {
+            transform: scale(1.05);
+            opacity: 0.3;
+        }
+
+        .cat-box:hover p {
+            opacity: 1;
+        }
+
+        .cat-box:hover {
+            background-color: var(--gold);
+        }
+
+        /* --- QUOTE SECTION --- */
+        .hoffer-section {
+            padding: 150px 15%;
+            text-align: center;
+            background-color: var(--white);
+        }
+
+        .hoffer-section blockquote {
+            font-size: 1.8rem;
             color: var(--navy);
+            line-height: 1.6;
         }
 
         footer {
+            padding: 40px;
             text-align: center;
-            padding: 60px;
-            background: var(--light-grey);
-            font-size: 0.9rem;
-            color: var(--slate);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            background: var(--navy);
+            color: white;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .categories-container { grid-template-columns: 1fr; height: auto; }
+            .cat-box { height: 400px; }
         }
     </style>
 </head>
 <body>
 
+    <nav>
+        <div class="brand">NARROW GATE</div>
+        <div style="color: white; font-size: 0.8rem; letter-spacing: 2px;">EST. 1989</div>
+    </nav>
+
     <header>
-        <div class="logo">NARROW GATE</div>
-        <div class="tagline">"For narrow is the gate and difficult is the way which leads to life."</div>
-        <a href="#work" class="btn">View the Portfolio</a>
+        <div class="floating-quote">
+            "Cities have the capability of providing something for everybody, only because, and only when, they are created by everybody."
+            <br>
+            <span style="font-size: 1.2rem; font-style: normal; letter-spacing: 3px; margin-top: 20px; display: block;">— JANE JACOBS</span>
+        </div>
     </header>
 
-    <section id="work">
-        <h2 style="text-align: center; font-size: 2.8rem; margin-bottom: 20px;">The Hierarchy of Place</h2>
-        <p style="text-align: center; max-width: 700px; margin: 0 auto 60px auto;">Click a category to explore vision-led results ranging from historic restoration to the building of entire neighborhoods.</p>
-
-        <div class="grid">
-            <div class="category-card">
-                <img src="https://raw.githubusercontent.com/YourRepo/Images/main/canal-street-view.jpg" alt="Traditional Neighborhoods"> <div class="card-content">
-                    <h3>Traditional Neighborhoods</h3>
-                    <ul class="project-links">
-                        <li>• I'On (Mount Pleasant)</li>
-                        <li>• Newpoint (Beaufort)</li>
-                        <li>• Hammond’s Ferry</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="category-card">
-                <img src="https://raw.githubusercontent.com/YourRepo/Images/main/fort-sullivan-castle.jpg" alt="Historic Restoration"> <div class="card-content">
-                    <h3>Historic Restoration</h3>
-                    <ul class="project-links">
-                        <li>• Fort Sullivan (Sullivan’s Island)</li>
-                        <li>• Morris Square (Charleston)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="category-card">
-                <img src="https://raw.githubusercontent.com/YourRepo/Images/main/cobblestone-alley-view.jpg" alt="Adaptive Reuse"> <div class="card-content">
-                    <h3>Adaptive Reuse</h3>
-                    <ul class="project-links">
-                        <li>• Earl's Court (Old Village)</li>
-                        <li>• Catfiddle Street</li>
-                        <li>• Village at Port Royal</li>
-                    </ul>
-                </div>
+    <div class="categories-container" id="work">
+        
+        <div class="cat-box">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGDsQ80nRqIjJY7r_3O_7kIzx6_OxG0B5SyQ&s" alt="Neighborhoods">
+            <div class="cat-label">
+                <h2>Neighborhoods</h2>
+                <p>I'On & Newpoint</p>
             </div>
         </div>
-    </section>
 
-    <section class="philosophy-banner">
-        [cite_start]<blockquote>"In times of change, learners inherit the earth, while the learned find themselves beautifully equipped to deal with a world that no longer exists." [cite: 343]</blockquote>
-        <p style="margin-top: 30px; opacity: 0.8;">— ERIC HOFFER</p>
+        <div class="cat-box">
+            <img src="https://www.cnu.org/sites/default/files/Earls-court-plan.png" alt="Historic Restoration">
+            <div class="cat-label">
+                <h2>Restoration</h2>
+                <p>Fort Sullivan</p>
+            </div>
+        </div>
+
+        <div class="cat-box">
+            <img src="https://images.squarespace-cdn.com/content/v1/59944cda03596ee46fd2af25/1520008910631-QZSKU0LHTNO7P5TWAS55/Morri+Sq-107.jpeg?format=2500w" alt="Urban Infill">
+            <div class="cat-label">
+                <h2>Urban Infill</h2>
+                <p>Morris Square</p>
+            </div>
+        </div>
+
+        <div class="cat-box">
+            <img src="https://www.cnu.org/sites/default/files/Earls-court-plan.png" alt="Adaptive Reuse">
+            <div class="cat-label">
+                <h2>Adaptive Reuse</h2>
+                <p>Earl's Court</p>
+            </div>
+        </div>
+
+    </div>
+
+    <section class="hoffer-section">
+        <blockquote>
+            "In times of change, learners inherit the earth, while the learned find themselves beautifully equipped to deal with a world that no longer exists."
+        </blockquote>
+        [cite_start]<p style="margin-top: 20px; letter-spacing: 3px; font-weight: 600;">— ERIC HOFFER [cite: 343]</p>
     </section>
 
     <footer>
-        <p>&copy; 2026 NARROW GATE | Formerly Loci</p>
-        <p>Expert Simplicity in the Built Environment</p>
+        NARROW GATE | FORMERLY LOCI | SOUTH CAROLINA
     </footer>
 
     <script>
-        ScrollReveal().reveal('.category-card', { 
-            delay: 200, 
-            distance: '50px', 
-            origin: 'bottom',
-            interval: 200 
-        });
-        ScrollReveal().reveal('.philosophy-banner', { delay: 400 });
+        ScrollReveal().reveal('.cat-box', { interval: 200, scale: 0.85 });
     </script>
 </body>
 </html>
